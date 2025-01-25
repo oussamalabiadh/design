@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page des Catégories - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles personnalisés */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .aside-bar {
+            background-color: #4595D4;
+            color: white;
+            height: 100vh;
+            padding-top: 30px;
+            position: fixed;
+            width: 250px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .aside-bar h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .aside-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .aside-bar a:hover {
+            background-color: #3c7cbf;
+            border-radius: 5px;
+        }
+
+        .aside-bar i {
+            margin-right: 10px;
+        }
+
+        .aside-bar .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #2b3d6b;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .aside-bar .logout:hover {
+            background-color: #1f2b4a;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        /* Cards pour les catégories de dépenses */
+        .category-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .category-card .card-header {
+            background-color: #4595D4;
+            color: white;
+        }
+
+        .chart-container {
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            height: 400px;
+
+        }
+
+        /* Animation pour le contenu */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Aside Bar -->
+        <div class="aside-bar">
+            <h3>Dashboard</h3>
+            <a href="acceuil.html" class="fade-in">
+                <i class="fas fa-home"></i> Page d'Accueil
+            </a>
+            <a href="Recommandations.html" class="fade-in">
+                <i class="fas fa-lightbulb"></i> Recommandations
+            </a>
+            <a href="./categories.html" class="fade-in">
+                <i class="fas fa-th-large"></i> Catégories
+            </a>
+            <a href="./RapportsFinanciers.html" class="fade-in">
+                <i class="fas fa-chart-bar"></i> Rapports Financiers
+            </a>
+            <a href="./historique.html" class="fade-in">
+                <i class="fas fa-history"></i> Historique des Transactions
+            </a>
+            <a href="./notification.html" class="fade-in">
+                <i class="fas fa-bell"></i> Notifications
+            </a>
+            <a href="./profile.html" class="fade-in">
+                <i class="fas fa-user"></i> Profil
+            </a>
+            <a href="./support.html" class="fade-in">
+                <i class="fas fa-headset"></i> Support
+            </a>
+            <!-- Logout -->
+            <a href="../index.html" class="logout fade-in">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content w-100">
+            <div class="container-fluid">
+                <h1 class="my-4">Catégories de Dépenses - Administration</h1>
+
+                <!-- Filtrage des catégories -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <br><br><br>
+                        <div class="category-card fade-in">
+                            <div class="card-header">Filtrer par Catégorie</div>
+                            <div class="card-body">
+                                <form id="filterForm">
+                                    <div class="mb-3">
+                                        <label for="categorySelect" class="form-label">Sélectionnez une catégorie</label>
+                                        <select id="categorySelect" class="form-select" aria-label="Sélectionner une catégorie">
+                                            <option value="">Choisir une catégorie</option>
+                                            <option value="Alimentation">Alimentation</option>
+                                            <option value="Transport">Transport</option>
+                                            <option value="Logement">Logement</option>
+                                            <option value="Loisirs">Loisirs</option>
+                                            <option value="Autres">Autres</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Appliquer le filtre</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container fade-in">
+                            <h4>Répartition des Dépenses par Catégorie</h4>
+                            <canvas id="expenseCategoryChartAdmin"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tableau des dépenses -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="category-card fade-in">
+                            <div class="card-header">Dépenses par Catégorie</div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Catégorie</th>
+                                            <th scope="col">Montant Total (€)</th>
+                                            <th scope="col">Nombre de Transactions</th>
+                                            <th scope="col">Recommandation IA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenseTableBody">
+                                        <!-- Lignes des dépenses filtrées -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggestions IA -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="category-card fade-in">
+                            <div class="card-header">Suggestions IA pour équilibrer les dépenses</div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><i class="fas fa-lightbulb"></i> Augmenter les investissements dans les secteurs à forte rentabilité.</li>
+                                    <li><i class="fas fa-arrow-right"></i> Réduire les dépenses inutiles dans les loisirs et réévaluer les abonnements mensuels.</li>
+                                    <li><i class="fas fa-chart-line"></i> Diversifier les dépenses dans les domaines d'avenir tels que la technologie et l'énergie verte.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphiques (si nécessaire) -->
+                <div class="row mt-4">
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Bootstrap, Chart.js et Font Awesome -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Code pour filtrer et afficher les dépenses par catégorie (simulé)
+        document.getElementById('filterForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const category = document.getElementById('categorySelect').value;
+
+            // Ici, vous pouvez ajouter une logique pour récupérer les données filtrées.
+            const expenseTableBody = document.getElementById('expenseTableBody');
+            expenseTableBody.innerHTML = `
+                <tr>
+                    <td>${category}</td>
+                    <td>5000</td>
+                    <td>12</td>
+                    <td><span class="badge bg-info">Optimiser les dépenses</span></td>
+                </tr>
+            `;
+        });
+
+        // Graphique des catégories de dépenses (Chart.js)
+        var ctx = document.getElementById('expenseCategoryChartAdmin').getContext('2d');
+        var expenseCategoryChartAdmin = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Alimentation', 'Transport', 'Logement', 'Loisirs', 'Autres'],
+                datasets: [{
+                    label: 'Répartition des Dépenses',
+                    data: [40, 25, 20, 10, 5],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#4caf50'],
+                    hoverBackgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#4caf50']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>

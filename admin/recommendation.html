@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page des Recommandations IA - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles personnalisés */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .aside-bar {
+            background-color: #4595D4;
+            color: white;
+            height: 100vh;
+            padding-top: 30px;
+            position: fixed;
+            width: 250px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .aside-bar h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .aside-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .aside-bar a:hover {
+            background-color: #3c7cbf;
+            border-radius: 5px;
+        }
+
+        .aside-bar i {
+            margin-right: 10px;
+        }
+
+        .aside-bar .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #2b3d6b;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .aside-bar .logout:hover {
+            background-color: #1f2b4a;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .recommendation-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .recommendation-box h4 {
+            margin-bottom: 10px;
+        }
+
+        .recommendation-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .recommendation-list li {
+            margin-bottom: 10px;
+        }
+
+        .recommendation-list i {
+            margin-right: 10px;
+        }
+
+        .chart-container {
+            background-color: white;
+            padding: 50px;
+            height: 600px; /* Définir une hauteur fixe */
+
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .chart-container h4 {
+            margin-bottom: 20px;
+        }
+
+        /* Cards pour les recommandations IA */
+        .recommendation-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .recommendation-card .card-header {
+            background-color: #4595D4;
+            color: white;
+        }
+
+        /* Animation pour le contenu */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Aside Bar -->
+        <div class="aside-bar">
+            <h3>Admin</h3>
+            <a href="acceuil.html" class="fade-in">
+                <i class="fas fa-home"></i> Page d'Accueil
+            </a>
+            <a href="recommendation.html" class="fade-in">
+                <i class="fas fa-lightbulb"></i> Recommandations
+            </a>
+            <a href="./category.html" class="fade-in">
+                <i class="fas fa-th-large"></i> Catégories
+            </a>
+            <a href="./scanne.html" class="fade-in">
+                <i class="fas fa-chart-bar"></i> Scanne tikee
+            </a>
+            <a href="./historique.html" class="fade-in">
+                <i class="fas fa-history"></i> Historique des Transactions
+            </a>
+            <a href="./notification.html" class="fade-in">
+                <i class="fas fa-bell"></i> Notifications
+            </a>
+            <a href="./paramettre.html" class="fade-in">
+                <i class="fas fa-user"></i> Paramettre
+            </a>
+            <a href="./support.html" class="fade-in">
+                <i class="fas fa-headset"></i> Support
+            </a>
+            <!-- Logout -->
+            <a href="../Accueil.html" class="logout fade-in">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content w-100">
+            <div class="container-fluid">
+                <h1 class="my-4">Recommandations IA - Administration</h1>
+
+                <!-- Suggestions IA -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="recommendation-card fade-in">
+                            <div class="card-header">Optimisation des Finances Globales</div>
+                            <div class="card-body">
+                                <ul class="recommendation-list">
+                                    <li><i class="fas fa-check-circle text-success"></i> Recommandation : Réduire les coûts d'exploitation de 5% pour améliorer la rentabilité.</li>
+                                    <li><i class="fas fa-arrow-right text-info"></i> Analyse des dépenses : Alerte sur une tendance d'augmentation des coûts dans la catégorie "Transport".</li>
+                                    <li><i class="fas fa-bolt text-warning"></i> Conseils IA : Diversifier les investissements pour réduire le risque global et améliorer les rendements.</li>
+                                    <li><i class="fas fa-star text-primary"></i> Recommandations stratégiques : Augmenter les investissements dans des secteurs porteurs tels que la technologie et l'énergie verte.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analyse des Transactions -->
+                    <div class="col-md-6">
+                        <div class="recommendation-card fade-in">
+                            <div class="card-header">Analyse des Transactions Inhabituelles</div>
+                            <div class="card-body">
+                                <ul class="recommendation-list">
+                                    <li><i class="fas fa-user-circle text-warning"></i> Utilisateur X a effectué une transaction anormale de 1000 € dans la catégorie "Loisirs".</li>
+                                    <li><i class="fas fa-user-circle text-warning"></i> Utilisateur Y a une augmentation de 30% de ses dépenses dans la catégorie "Alimentation".</li>
+                                    <li><i class="fas fa-bolt text-danger"></i> Alerte de fraude possible : Transaction de 5000 € dans un pays non habituel pour l'utilisateur Z.</li>
+                                    <li><i class="fas fa-user-circle text-info"></i> Utilisateur A a une tendance à dépenser plus que la moyenne dans les catégories "Transport" et "Logement".</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphiques des Recommandations IA -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="chart-container fade-in">
+                            <h4>Analyse des Tendances Financières</h4>
+                            <canvas id="trendChartAdmin"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="chart-container fade-in">
+                            <h4>Répartition des Dépenses par Catégorie</h4>
+                            <canvas id="expenseCategoryChartAdmin"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Bootstrap, Chart.js et Font Awesome -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Graphique des tendances financières - Admin
+        var ctx1 = document.getElementById('trendChartAdmin').getContext('2d');
+        var trendChartAdmin = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil'],
+                datasets: [{
+                    label: 'Dépenses Globales',
+                    data: [3000, 3200, 3300, 3400, 3500, 3600, 3700],
+                    borderColor: '#4595D4',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Graphique des catégories de dépenses - Admin
+        var ctx2 = document.getElementById('expenseCategoryChartAdmin').getContext('2d');
+        var expenseCategoryChartAdmin = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Alimentation', 'Transport', 'Logement', 'Loisirs', 'Autres'],
+                datasets: [{
+                    label: 'Répartition des Dépenses',
+                    data: [40, 25, 20, 10, 5],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#4caf50'],
+                    hoverBackgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#4caf50']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>

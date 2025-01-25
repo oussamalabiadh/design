@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles personnalisés */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .aside-bar {
+            background-color: #4595D4;
+            color: white;
+            height: 100vh;
+            padding-top: 30px;
+            position: fixed;
+            width: 250px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .aside-bar h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .aside-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .aside-bar a:hover {
+            background-color: #3c7cbf;
+            border-radius: 5px;
+        }
+
+        .aside-bar i {
+            margin-right: 10px;
+        }
+
+        .aside-bar .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #2b3d6b;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .aside-bar .logout:hover {
+            background-color: #1f2b4a;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+
+
+        .notifications-container {
+            margin-top: 50px;
+        }
+
+        .notifications-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+        }
+
+        .notification-status {
+            font-weight: bold;
+            color: green;
+        }
+
+        .unread {
+            color: red;
+        }
+
+        .alert-ia {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffec3d;
+        }
+
+        .btn-filter {
+            background-color: #4595D4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 15px;
+        }
+
+        .btn-filter:hover {
+            background-color: #3c7cbf;
+        }
+    </style>
+</head>
+
+<body>
+   <div class="d-flex">
+    <div class="aside-bar">
+        <h3>Dashboard</h3>
+        <a href="acceuil.html" class="fade-in">
+            <i class="fas fa-home"></i> Page d'Accueil
+        </a>
+        <a href="Recommandations.html" class="fade-in">
+            <i class="fas fa-lightbulb"></i> Recommandations
+        </a>
+        <a href="./categories.html" class="fade-in">
+            <i class="fas fa-th-large"></i> Catégories
+        </a>
+        <a href="./RapportsFinanciers.html" class="fade-in">
+            <i class="fas fa-chart-bar"></i> Rapports Financiers
+        </a>
+        <a href="./historique.html" class="fade-in">
+            <i class="fas fa-history"></i> Historique des Transactions
+        </a>
+        <a href="./notification.html" class="fade-in">
+            <i class="fas fa-bell"></i> Notifications
+        </a>
+        <a href="./profile.html" class="fade-in">
+            <i class="fas fa-user"></i> Profil
+        </a>
+        <a href="./support.html" class="fade-in">
+            <i class="fas fa-headset"></i> Support
+        </a>
+        <!-- Logout -->
+        <a href="../index.html" class="logout fade-in">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+    <div class="main-content w-100 container notifications-container">
+        <div class="notifications-card">
+            <h3>Rappels et Alertes Financières</h3>
+
+            <!-- Filtrage des notifications -->
+            <div class="mb-3">
+                <button class="btn-filter">Filtrer par Type</button>
+                <input type="text" class="form-control mt-2" id="search-bar" placeholder="Rechercher une notification...">
+            </div>
+
+            <!-- Tableau des notifications -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Message</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody id="notification-list">
+                    <!-- Exemples de notifications -->
+                    <tr class="alert-ia">
+                        <td>2025-01-20</td>
+                        <td>Une alerte a été générée en raison de vos dépenses élevées dans les 30 derniers jours.</td>
+                        <td class="unread">Non Lu</td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-18</td>
+                        <td>Rappel : Le paiement de la facture de téléphone est dû dans 3 jours.</td>
+                        <td class="notification-status">Lu</td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-15</td>
+                        <td>Votre solde bancaire est inférieur à votre limite définie.</td>
+                        <td class="unread">Non Lu</td>
+                    </tr>
+                    <tr class="alert-ia">
+                        <td>2025-01-10</td>
+                        <td>Une alerte a été générée en raison de vos dépenses inhabituelles pour le mois de janvier.</td>
+                        <td class="unread">Non Lu</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+   </div>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Recherche dans les notifications
+        document.getElementById('search-bar').addEventListener('input', function (event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#notification-list tr');
+            
+            rows.forEach(row => {
+                const message = row.cells[1].textContent.toLowerCase();
+                if (message.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
